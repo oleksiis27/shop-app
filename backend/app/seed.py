@@ -103,7 +103,7 @@ def seed():
 
     try:
         # Check if already seeded
-        existing = db.execute(select(User)).scalar_one_or_none()
+        existing = db.execute(select(User).limit(1)).scalar_one_or_none()
         if existing:
             print("Database already seeded, skipping.")
             return

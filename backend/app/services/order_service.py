@@ -90,7 +90,7 @@ def get_order_by_id(db: Session, order_id: int, user_id: int | None = None) -> O
     if user_id is not None:
         query = query.where(Order.user_id == user_id)
 
-    order = db.execute(query).scalar_one_or_none()
+    order = db.execute(query).unique().scalar_one_or_none()
     if not order:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Order not found")
     return order
