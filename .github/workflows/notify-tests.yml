@@ -1,0 +1,19 @@
+name: Trigger test suites
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: [shop-tests-java]
+    steps:
+      - name: Dispatch to ${{ matrix.repo }}
+        run: |
+          gh api repos/oleksiis27/${{ matrix.repo }}/dispatches \
+            -f event_type=service-updated
+        env:
+          GH_TOKEN: ${{ secrets.TESTS_TRIGGER_TOKEN }}
