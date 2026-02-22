@@ -2,7 +2,7 @@ name: Trigger test suites
 
 on:
   push:
-    branches: [main]
+    branches: [main, master]
 
 jobs:
   trigger:
